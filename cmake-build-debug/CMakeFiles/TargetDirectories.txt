@@ -1,0 +1,3 @@
+/Users/maxkienast/Desktop/Education/Programming Courses/C++/TCP-IP-Server/cmake-build-debug/CMakeFiles/TCP_IP_Server.dir
+/Users/maxkienast/Desktop/Education/Programming Courses/C++/TCP-IP-Server/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/maxkienast/Desktop/Education/Programming Courses/C++/TCP-IP-Server/cmake-build-debug/CMakeFiles/rebuild_cache.dir

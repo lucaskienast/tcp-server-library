@@ -1,0 +1,27 @@
+//
+// Created by Max Kienast on 17.10.23.
+//
+
+#ifndef TCP_IP_SERVER_TCPCLIENTDBMANAGER_H
+#define TCP_IP_SERVER_TCPCLIENTDBMANAGER_H
+
+
+#include <list>
+#include "TcpServerController.h"
+#include "TcpClient.h"
+
+class TcpClientDbManager {
+
+private:
+    std::list<TcpClient *>tcp_client_db;
+
+public:
+    TcpServerController *tcp_cntrlr;
+
+    TcpClientDbManager(TcpServerController *);
+    ~TcpClientDbManager();
+
+};
+
+
+#endif //TCP_IP_SERVER_TCPCLIENTDBMANAGER_H
