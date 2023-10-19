@@ -1,6 +1,15 @@
-#include <iostream>
+#include "TcpServerController.h"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+
+    TcpServerController *server1 = new TcpServerController(
+            "127.0.0.1",
+            40000,
+            "Default TCP Server");
+
+    server1->Start();
+
+    scanf("\n");
+
     return 0;
 }

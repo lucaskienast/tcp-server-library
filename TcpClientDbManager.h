@@ -7,8 +7,8 @@
 
 
 #include <list>
-#include "TcpServerController.h"
-#include "TcpClient.h"
+class TcpServerController;
+class TcpClient;
 
 class TcpClientDbManager {
 
@@ -16,7 +16,7 @@ private:
     std::list<TcpClient *>tcp_client_db;
 
 public:
-    TcpServerController *tcp_cntrlr;
+    TcpServerController *tcp_ctrlr;
 
     TcpClientDbManager(TcpServerController *);
     ~TcpClientDbManager();

@@ -6,14 +6,14 @@
 #define TCP_IP_SERVER_TCPCLIENTSERVICEMANAGER_H
 
 
-#include "TcpServerController.h"
+class TcpServerController;
 
 class TcpClientServiceManager {
 
 private:
 
 public:
-    TcpServerController *tcp_cntrlr;
+    TcpServerController *tcp_ctrlr;
 
     TcpClientServiceManager(TcpServerController *);
     ~TcpClientServiceManager();

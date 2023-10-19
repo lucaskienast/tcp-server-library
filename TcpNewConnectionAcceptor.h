@@ -6,7 +6,7 @@
 #define TCP_IP_SERVER_TCPNEWCONNECTIONACCEPTOR_H
 
 
-#include "TcpServerController.h"
+class TcpServerController;
 
 class TcpNewConnectionAcceptor {
 

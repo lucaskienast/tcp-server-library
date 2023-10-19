@@ -8,9 +8,9 @@
 
 #include <cstdint>
 #include <string>
-#include "TcpNewConnectionAcceptor.h"
-#include "TcpClientDbManager.h"
-#include "TcpClientServiceManager.h"
+class TcpNewConnectionAcceptor;
+class TcpClientServiceManager;
+class TcpClientDbManager;
 
 class TcpServerController {
 
