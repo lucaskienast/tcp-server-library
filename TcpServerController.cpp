@@ -30,10 +30,19 @@ TcpServerController::~TcpServerController(){
 }
 
 void TcpServerController::Start() {
-    //... method body
-
-    // For demonstration, let's print a message when this method is called
     std::cout << "Starting the TcpServerController..." << std::endl;
 
-    // Other logic related to starting the server controller goes here...
+    /*
+     * Start the CRS thread
+     * Start the DRS thread
+     * Init the DBMS
+     */
+
+    this->tcp_new_conn_acc->StartTcpNewConnectionAcceptorThread();
+    this->tcp_client_svc_mgr->StartTcpClientServiceManagerThread();
+    this->tcp_client_db_mgr->StartTcpClientDbManagerThread();
+
+    printf("The TCP server is running [%s, %d]\nOk.\n",
+           network_convert_ip_n_to_p(this->ip_addr, 0),
+           this->port_no);
 }

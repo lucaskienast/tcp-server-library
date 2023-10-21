@@ -18,6 +18,8 @@ public:
     TcpClientServiceManager(TcpServerController *);
     ~TcpClientServiceManager();
 
+    void StartTcpClientServiceManagerThread();
+
 };
 
 

@@ -8,15 +8,20 @@
 
 class TcpServerController;
 
+/* New connections are accepted using accept() sys call
+ * Create file descriptor accept_fd using socket() sys call
+ * */
 class TcpNewConnectionAcceptor {
 
 private:
-
+    int accept_fd;
+    pthread_t *accept_new_conn_thread;
 public:
     TcpServerController *tcp_ctrlr;
     TcpNewConnectionAcceptor(TcpServerController *);
     ~TcpNewConnectionAcceptor();
 
+    void StartTcpNewConnectionAcceptorThread();
 };
 
 

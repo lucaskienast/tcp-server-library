@@ -21,6 +21,8 @@ public:
     TcpClientDbManager(TcpServerController *);
     ~TcpClientDbManager();
 
+    void StartTcpClientDbManagerThread();
+
 };
 
 
