@@ -22,6 +22,7 @@ public:
     ~TcpNewConnectionAcceptor();
 
     void StartTcpNewConnectionAcceptorThread();
+    void StartTcpNewConnectionAcceptorThreadInternal();
 };
 
 
