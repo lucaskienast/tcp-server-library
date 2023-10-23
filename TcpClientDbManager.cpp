@@ -15,3 +15,7 @@ TcpClientDbManager::~TcpClientDbManager(){
 void TcpClientDbManager::StartTcpClientDbManagerThread() {
 
 }
+
+void TcpClientDbManager::AddClientToDb(TcpClient *tcp_client) {
+    this->tcp_client_db.push_back(tcp_client);
+}

@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include "TcpNewConnectionAcceptor.h"
+#include "TcpClient.h"
 #include "TcpClientDbManager.h"
 #include "TcpClientServiceManager.h"
 #include "TcpServerController.h"
@@ -45,4 +46,9 @@ void TcpServerController::Start() {
     printf("The TCP server is running [%s, %d]\nOk.\n",
            network_convert_ip_n_to_p(this->ip_addr, 0),
            this->port_no);
+}
+
+void TcpServerController::ProcessNewClient(TcpClient *tcp_client) {
+    this->tcp_client_db_mgr->AddClientToDb(tcp_client);
+    this->tcp_client_svc_mgr->ClientDfStartListen(tcp_client);
 }

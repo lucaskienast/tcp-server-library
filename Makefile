@@ -6,6 +6,8 @@ OBJS=TcpClientDBManager.o 		 		\
 			TcpClientServiceManager.o 		 \
 			TcpNewConnectionAcceptor.o 	 \
 			TcpServerController.o 				  \
+			TcpClient.o 				  \
+			tcp_client.o 				  \
 			network_utils.o
 
 testapp.exe:testapp.o ${OBJS}
@@ -25,6 +27,12 @@ TcpNewConnectionAcceptor.o:TcpNewConnectionAcceptor.cpp
 
 TcpServerController.o:TcpServerController.cpp
 	${CC} ${CFLAGS} -c TcpServerController.cpp -o TcpServerController.o
+
+TcpClient.o:TcpClient.cpp
+	${CC} ${CFLAGS} -c TcpClient.cpp -o TcpClient.o
+
+tcp_client.o:tcp_client.cpp
+	${CC} ${CFLAGS} -c tcp_client.cpp -o tcp_client.o
 
 network_utils.o:network_utils.cpp
 	${CC} ${CFLAGS} -c network_utils.cpp -o network_utils.o

@@ -135,6 +135,7 @@ setup_tcp_communication(){
 }
 
 
+/*
 int
 main(int argc, char **argv){
 
@@ -142,3 +143,4 @@ main(int argc, char **argv){
     printf("application quits\n");
     return 0;
 }
+*/

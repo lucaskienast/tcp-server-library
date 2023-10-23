@@ -19,6 +19,7 @@ public:
     ~TcpClientServiceManager();
 
     void StartTcpClientServiceManagerThread();
+    void ClientDfStartListen(TcpClient *);
 
 };
 

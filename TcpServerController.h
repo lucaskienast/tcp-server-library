@@ -11,6 +11,7 @@
 class TcpNewConnectionAcceptor;
 class TcpClientServiceManager;
 class TcpClientDbManager;
+class TcpClient;
 
 class TcpServerController {
 
@@ -30,6 +31,7 @@ public:
 
     void Start();
     void Stop();
+    void ProcessNewClient(TcpClient *tcp_client);
 };
 
 
