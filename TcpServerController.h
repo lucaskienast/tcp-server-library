@@ -25,6 +25,16 @@ public:
     uint16_t port_no;
     std::string name;
 
+    void(*client_connected)(const TcpServerController *, const TcpClient *);
+    void(*client_disconnected)(const TcpServerController *, const TcpClient *);
+    void(*client_msg_received)(const TcpServerController *, const TcpClient *, unsigned char *, uint16_t);
+
+    void SetServerNotifyCallbacks(
+        void(*client_connected)(const TcpServerController *, const TcpClient *),
+        void(*client_disconnected)(const TcpServerController *, const TcpClient *),
+        void(*client_msg_received)(const TcpServerController *, const TcpClient *, unsigned char *, uint16_t)
+    );
+
     TcpServerController(std::string ip_addr, uint16_t port_no, std::string name);
 
     ~TcpServerController();

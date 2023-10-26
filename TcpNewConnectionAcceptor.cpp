@@ -65,14 +65,14 @@ void TcpNewConnectionAcceptor::StartTcpNewConnectionAcceptorThreadInternal() {
 
     struct sockaddr_in client_addr;
     socklen_t  addr_len = sizeof(client_addr);
-    int comm_sock_df;
+    int comm_sock_fd;
 
     // Create infinite loop
     while (true) {
         // Invoke accept() to accept to new connections
-        comm_sock_df = accept(this->accept_fd, (struct sockaddr *)&client_addr, &addr_len);
+        comm_sock_fd = accept(this->accept_fd, (struct sockaddr *)&client_addr, &addr_len);
 
-        if (comm_sock_df < 0) {
+        if (comm_sock_fd < 0) {
             printf("Error in accepting new connection\n");
             continue;
         }
@@ -83,7 +83,11 @@ void TcpNewConnectionAcceptor::StartTcpNewConnectionAcceptorThreadInternal() {
                 );
 
         tcp_client->tcp_ctrlr = this->tcp_ctrlr;
-        tcp_client->comm_fd = comm_sock_df;
+        tcp_client->comm_fd = comm_sock_fd;
+
+        if (this->tcp_ctrlr->client_connected) {
+            this->tcp_ctrlr->client_connected(this->tcp_ctrlr, tcp_client);
+        }
 
         // Tell TCP controller of new connection to further process the client
         this->tcp_ctrlr->ProcessNewClient(tcp_client);

@@ -52,3 +52,13 @@ void TcpServerController::ProcessNewClient(TcpClient *tcp_client) {
     this->tcp_client_db_mgr->AddClientToDb(tcp_client);
     this->tcp_client_svc_mgr->ClientDfStartListen(tcp_client);
 }
+
+void TcpServerController::SetServerNotifyCallbacks(
+        void(*client_connected)(const TcpServerController *, const TcpClient *),
+        void(*client_disconnected)(const TcpServerController *, const TcpClient *),
+        void(*client_msg_received)(const TcpServerController *, const TcpClient *, unsigned char *, uint16_t)) {
+
+    this->client_connected = client_connected;
+    this->client_disconnected = client_disconnected;
+    this->client_msg_received = client_msg_received;
+}
