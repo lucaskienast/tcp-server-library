@@ -42,6 +42,7 @@ public:
     void Start();
     void Stop();
     void ProcessNewClient(TcpClient *tcp_client);
+    void Display();
 };
 
 

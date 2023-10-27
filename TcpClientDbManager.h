@@ -23,6 +23,7 @@ public:
 
     void StartTcpClientDbManagerThread();
     void AddClientToDb(TcpClient *tcp_client);
+    void DisplayClientDb();
 
 };
 

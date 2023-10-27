@@ -44,9 +44,12 @@ int main() {
             appln_client_connected,
             appln_client_disconnected,
             appln_client_msg_received);
+
     server1->Start();
 
     scanf("\n");
+
+    server1->Display();
 
     return 0;
 }
