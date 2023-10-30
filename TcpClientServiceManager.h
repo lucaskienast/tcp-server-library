@@ -29,7 +29,10 @@ public:
     void StartTcpClientServiceManagerThread();
     void StartTcpClientServiceManagerThreadInternal();
     void ClientDfStartListen(TcpClient *);
-
+    void CopyClientFDtoFDSet(fd_set *fdset);
+    int GetMaxFd();
+    TcpClient* LookUpClientDB(uint32_t ip_addr, uint16_t port_no);
+    void AddClientToDB(TcpClient *tcp_client);
 };
 
 
