@@ -2,9 +2,14 @@
 // Created by Max Kienast on 17.10.23.
 //
 
+#include <netinet/in.h>
+#include <sys/select.h>
 #include "TcpServerController.h"
 #include "TcpClient.h"
 #include "TcpClientServiceManager.h"
+
+#define TCP_CLIENT_RECV_BUFFER_SIZE 1024
+unsigned char client_recv_buffer[TCP_CLIENT_RECV_BUFFER_SIZE];
 
 TcpClientServiceManager::TcpClientServiceManager(TcpServerController *tcp_ctrlr) {
     this->tcp_ctrlr = tcp_ctrlr;
@@ -18,7 +23,37 @@ TcpClientServiceManager::~TcpClientServiceManager(){
 }
 
 void TcpClientServiceManager::StartTcpClientServiceManagerThreadInternal() {
+    // Invoke select system call on all clients present in Client DB
+    int rev_bytes;
+    TcpClient *tcp_client, *next_tcp_client;
+    struct sockaddr_in client_addr;
+    std::list<TcpClient *>::iterator it;
+    socklen_t addr_len = sizeof(client_addr);
 
+    while (true) {
+        memcpy(&this->active_fd_set, &this->backup_fd_set, sizeof(fd_set));
+        select(this->max_fd + 1, &this->active_fd_set, 0, 0, 0);
+
+        for (it = this->tcp_client_db.begin(); it != this->tcp_client_db.end(); ++it) {
+            tcp_client = *it;
+            next_tcp_client = *(++it);
+
+            if (FD_ISSET(tcp_client->comm_fd, &this->active_fd_set)) {
+                rev_bytes = recvfrom(
+                        tcp_client->comm_fd,
+                        client_recv_buffer,
+                        TCP_CLIENT_RECV_BUFFER_SIZE,
+                        0,
+                        (struct sockaddr *)&client_addr,
+                        &addr_len
+                );
+
+                if (this->tcp_ctrlr->client_msg_received) {
+                    this->tcp_ctrlr->client_msg_received(this->tcp_ctrlr, tcp_client, client_recv_buffer, rev_bytes);
+                }
+            }
+        }
+    }
 }
 
 void *tcp_client_svc_mgr_thread_fn(void *arg) {
@@ -31,6 +66,7 @@ void TcpClientServiceManager::StartTcpClientServiceManagerThread() {
     pthread_attr_t attr;
     pthread_attr_init(&attr);
     pthread_create(this->client_svc_mgr_thread, &attr, tcp_client_svc_mgr_thread_fn, (void*)this);
+    printf("Service started: TcpClientServiceManagerThread\n");
 }
 
 void TcpClientServiceManager::ClientDfStartListen(TcpClient *) {
