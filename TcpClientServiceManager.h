@@ -27,8 +27,9 @@ public:
     ~TcpClientServiceManager();
 
     void StartTcpClientServiceManagerThread();
+    void StopTcpClientServiceManagerThread();
     void StartTcpClientServiceManagerThreadInternal();
-    void ClientDfStartListen(TcpClient *);
+    void ClientFdStartListen(TcpClient *);
     void CopyClientFDtoFDSet(fd_set *fdset);
     int GetMaxFd();
     TcpClient* LookUpClientDB(uint32_t ip_addr, uint16_t port_no);

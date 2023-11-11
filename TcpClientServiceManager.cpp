@@ -58,6 +58,8 @@ void TcpClientServiceManager::StartTcpClientServiceManagerThreadInternal() {
 
 void *tcp_client_svc_mgr_thread_fn(void *arg) {
     TcpClientServiceManager *svc_mgr = (TcpClientServiceManager *) arg;
+    pthread_setcancelstate(PTHREAD_CANCEL_ENABLE, NULL);
+    pthread_setcancelstate(PTHREAD_CANCEL_DEFERRED, NULL);
     svc_mgr->StartTcpClientServiceManagerThreadInternal();
     return NULL;
 }
@@ -69,8 +71,14 @@ void TcpClientServiceManager::StartTcpClientServiceManagerThread() {
     printf("Service started: TcpClientServiceManagerThread\n");
 }
 
-void TcpClientServiceManager::ClientDfStartListen(TcpClient *) {
+void TcpClientServiceManager::ClientFdStartListen(TcpClient *tcpClient) {
+    this->StopTcpClientServiceManagerThread();
+    printf("Client Service Manager Thread is cancelled.\n");
 
+    this->AddClientToDB(tcpClient);
+
+    this->client_svc_mgr_thread = (pthread_t *)calloc(1, sizeof(pthread_t));
+    this->StartTcpClientServiceManagerThread();
 }
 
 int TcpClientServiceManager::GetMaxFd() {
@@ -114,4 +122,11 @@ TcpClient* TcpClientServiceManager::LookUpClientDB(uint32_t ip_addr, uint16_t po
 
 void TcpClientServiceManager::AddClientToDB(TcpClient *tcp_client){
     this->tcp_client_db.push_back(tcp_client);
+}
+
+void TcpClientServiceManager::StopTcpClientServiceManagerThread() {
+    pthread_cancel(*this->client_svc_mgr_thread);
+    pthread_join(*this->client_svc_mgr_thread, NULL);
+    free(this->client_svc_mgr_thread);
+    this->client_svc_mgr_thread = NULL;
 }

@@ -50,7 +50,7 @@ void TcpServerController::Start() {
 
 void TcpServerController::ProcessNewClient(TcpClient *tcp_client) {
     this->tcp_client_db_mgr->AddClientToDb(tcp_client);
-    this->tcp_client_svc_mgr->ClientDfStartListen(tcp_client);
+    this->tcp_client_svc_mgr->ClientFdStartListen(tcp_client);
 }
 
 void TcpServerController::SetServerNotifyCallbacks(
