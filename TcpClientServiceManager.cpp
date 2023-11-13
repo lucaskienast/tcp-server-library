@@ -52,6 +52,7 @@ void TcpClientServiceManager::StartTcpClientServiceManagerThreadInternal() {
                     this->tcp_ctrlr->client_msg_received(this->tcp_ctrlr, tcp_client, client_recv_buffer, rev_bytes);
                 }
             }
+            memset(client_recv_buffer, 0, rev_bytes);
         }
     }
 }

@@ -29,7 +29,7 @@ static void appln_client_disconnected(const TcpServerController *tcp_server, con
 }
 
 static void appln_client_msg_received(const TcpServerController *tcp_server, const TcpClient *tcp_client, unsigned char* msg, uint16_t msg_size) {
-
+    printf("%s() Bytes received: %d msg: %s\n", __FUNCTION__, msg_size, msg);
 }
 
 

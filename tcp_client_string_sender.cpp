@@ -1,5 +1,5 @@
 //
-// Created by Max Kienast on 21.10.23.
+// Created by Max Kienast on 13.11.23.
 //
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,26 +14,8 @@
 #define DEST_PORT            40000
 #define SERVER_IP_ADDRESS   "127.0.0.1"
 
-#define SRC_PORT	     40001
+#define SRC_PORT	     40010
 #define LOCAL_IP_ADDRESS "127.0.0.1"
-
-#pragma pack (push,1)
-typedef struct _test_struct{
-
-    uint16_t msg_size;
-    unsigned int a;
-    unsigned int b;
-} test_struct_t;
-#pragma pack(pop)
-
-typedef struct result_struct_{
-
-    unsigned int c;
-
-} result_struct_t;
-
-test_struct_t client_data[2];
-result_struct_t result;
 
 void
 setup_tcp_communication(){
@@ -64,7 +46,7 @@ setup_tcp_communication(){
     dest.sin_addr = *((struct in_addr *)host->h_addr);
 
     /*Step 3 : Create a TCP socket*/
-    /*Create a socket finally. socket() is a system call, which asks for three paramemeters*/
+    /*Create a socket finally. socket() is a system call, which asks for three parameters*/
     sockfd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 #if 0
     /*to specify the client IP Address and Port no*/
@@ -88,54 +70,39 @@ setup_tcp_communication(){
     /*Step 4 : get the data to be sent to server*/
     /*Our client is now ready to send data to server. sendto() sends data to Server*/
 
-    PROMPT_USER:
+    const char *msg1 = "Hello Lucas, ";
+    const char *msg2 = "how are you";
+    int len1 = strlen (msg1);
+    int len2 = strlen (msg2);
 
-    /*prompt the user to enter data*/
-    printf("Enter a1 : ?\n");
-    scanf("%u", &client_data[0].a);
-    printf("Enter b1 : ?\n");
-    scanf("%u", &client_data[0].b);
-    client_data[0].msg_size = sizeof(client_data[0]);
+    while (1) {
+        //usleep(1000);
 
-    printf("Enter a2 : ?\n");
-    scanf("%u", &client_data[1].a);
-    printf("Enter b2 : ?\n");
-    scanf("%u", &client_data[1].b);
-    client_data[1].msg_size = sizeof(client_data[1]);
+        /*step 5 : send the data to server*/
+        sent_recv_bytes = sendto(sockfd,
+                                 msg1,
+                                 len1,
+                                 0,
+                                 (struct sockaddr *)&dest,
+                                 sizeof(struct sockaddr));
 
-    if(client_data[0].a == 0 && client_data[0].b == 0) {
-        close(sockfd);
-        exit(0);
+        printf("No of bytes sent = %d\n", sent_recv_bytes);
+
+        sent_recv_bytes = sendto(sockfd,
+                                 msg2,
+                                 len2,
+                                 0,
+                                 (struct sockaddr *)&dest,
+                                 sizeof(struct sockaddr));
+
+        printf("No of bytes sent = %d\n", sent_recv_bytes);
     }
-
-    /*step 5 : send the data to server*/
-    sent_recv_bytes = sendto(sockfd,
-                             client_data,
-                             sizeof(client_data),
-                             0,
-                             (struct sockaddr *)&dest,
-                             sizeof(struct sockaddr));
-
-    printf("No of bytes sent = %d\n", sent_recv_bytes);
-
-    /*Step 6 : Client also want to reply from server after sending data*/
-#if 0
-    /*recvfrom is a blocking system call, meaning the client program will not run past this point
-     * untill the data arrives on the socket from server*/
-    printf("Waiting for response:\n");
-    sent_recv_bytes =  recvfrom(sockfd, (char *)&result, sizeof(result_struct_t), 0,
-                    (struct sockaddr *)&dest, &addr_len);
-
-    printf("No of bytes recvd = %d\n", sent_recv_bytes);
-
-    printf("Result recvd = %u\n", result.c);
-#endif
-    /*Step 7: Client would want to send the data again to the server, go into infinite loop*/
-    goto PROMPT_USER;
 }
 
 
-int main(int argc, char **argv){
+int
+main(int argc, char **argv){
+
     setup_tcp_communication();
     printf("application quits\n");
     return 0;

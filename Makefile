@@ -37,6 +37,9 @@ tcp_client.o:tcp_client.cpp
 network_utils.o:network_utils.cpp
 	${CC} ${CFLAGS} -c network_utils.cpp -o network_utils.o
 
+network_utils.o:tcp_client_string_sender.cpp
+	${CC} ${CFLAGS} -c tcp_client_string_sender.cpp -o tcp_client_string_sender.o
+
 clean:
 	rm -f *.o
 	rm -f *exe
