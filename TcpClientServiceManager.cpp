@@ -4,12 +4,12 @@
 
 #include <netinet/in.h>
 #include <sys/select.h>
+#include <unistd.h>
 #include "TcpServerController.h"
 #include "TcpClient.h"
 #include "TcpClientServiceManager.h"
 
-#define TCP_CLIENT_RECV_BUFFER_SIZE 1024
-unsigned char client_recv_buffer[TCP_CLIENT_RECV_BUFFER_SIZE];
+unsigned char client_recv_buffer[MAX_CLIENT_BUFFER_SIZE];
 
 TcpClientServiceManager::TcpClientServiceManager(TcpServerController *tcp_ctrlr) {
     this->tcp_ctrlr = tcp_ctrlr;
@@ -42,11 +42,20 @@ void TcpClientServiceManager::StartTcpClientServiceManagerThreadInternal() {
                 rev_bytes = recvfrom(
                         tcp_client->comm_fd,
                         client_recv_buffer,
-                        TCP_CLIENT_RECV_BUFFER_SIZE,
+                        MAX_CLIENT_BUFFER_SIZE,
                         0,
                         (struct sockaddr *)&client_addr,
                         &addr_len
                 );
+
+                if (rev_bytes == 0) {
+                    printf("error no - %d\n", errno);
+                    sleep(1);
+                }
+
+                if (tcp_client->msgd) {
+                    tcp_client->msgd->ProcessMsg(tcp_client, client_recv_buffer, rev_bytes);
+                }
 
                 if (this->tcp_ctrlr->client_msg_received) {
                     this->tcp_ctrlr->client_msg_received(this->tcp_ctrlr, tcp_client, client_recv_buffer, rev_bytes);
