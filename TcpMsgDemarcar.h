@@ -14,7 +14,7 @@ typedef enum TcpMsgDemarcarType_ {
     TCP_DEMARCAR_FIXED_SIZE,
     TCP_DEMARCAR_VARIABLE_SIZE,
     TCP_DEMARCAR_PATTERN
-};
+} TcpMsgDemarcarType;
 
 typedef struct ByteCircularBuffer_ ByteCircularBuffer_t;
 class TcpClient;
@@ -37,8 +37,6 @@ public:
 
     void Destroy();
     void ProcessMsg(TcpClient *tcpClient, unsigned  char *msg_recvd, uint16_t msg_size);
-
-
 
 };
 

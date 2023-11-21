@@ -134,9 +134,10 @@ setup_tcp_communication(){
     goto PROMPT_USER;
 }
 
-
+/*
 int main(int argc, char **argv){
     setup_tcp_communication();
     printf("application quits\n");
     return 0;
 }
+*/

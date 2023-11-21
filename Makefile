@@ -3,6 +3,8 @@ CFLAGS=-g
 TARGET:testapp.exe
 LIBS=-lpthread
 OBJS=TcpClientDBManager.o 		 		\
+			TcpMsgFixedSizeDemarcar.o 		 \
+			TcpMsgDemarcar.o 		 \
 			TcpClientServiceManager.o 		 \
 			TcpNewConnectionAcceptor.o 	 \
 			TcpServerController.o 				  \
@@ -39,6 +41,12 @@ network_utils.o:network_utils.cpp
 
 network_utils.o:tcp_client_string_sender.cpp
 	${CC} ${CFLAGS} -c tcp_client_string_sender.cpp -o tcp_client_string_sender.o
+
+TcpMsgFixedSizeDemarcar.o:TcpMsgFixedSizeDemarcar.cpp
+	${CC} ${CFLAGS} -c TcpMsgFixedSizeDemarcar.cpp -o TcpMsgFixedSizeDemarcar.o
+
+TcpMsgDemarcar.o:TcpMsgDemarcar.cpp
+	${CC} ${CFLAGS} -c TcpMsgDemarcar.cpp -o TcpMsgDemarcar.o
 
 clean:
 	rm -f *.o

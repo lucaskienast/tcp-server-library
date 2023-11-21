@@ -10,6 +10,7 @@
 #include <list>
 
 class TcpServerController;
+class TcpClient;
 
 class TcpClientServiceManager {
 

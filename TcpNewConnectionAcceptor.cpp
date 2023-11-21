@@ -8,6 +8,8 @@
 #include "TcpNewConnectionAcceptor.h"
 #include "TcpClient.h"
 #include "network_utils.h"
+#include "TcpMsgFixedSizeDemarcar.h"
+#include "TcpMsgDemarcar.h"
 
 TcpNewConnectionAcceptor::TcpNewConnectionAcceptor(TcpServerController *tcp_ctrlr) {
     this->accept_fd = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
@@ -88,6 +90,8 @@ void TcpNewConnectionAcceptor::StartTcpNewConnectionAcceptorThreadInternal() {
         if (this->tcp_ctrlr->client_connected) {
             this->tcp_ctrlr->client_connected(this->tcp_ctrlr, tcp_client);
         }
+
+        tcp_client->msgd = new TcpMsgFixedSizeDemarcar(27);
 
         // Tell TCP controller of new connection to further process the client
         this->tcp_ctrlr->ProcessNewClient(tcp_client);

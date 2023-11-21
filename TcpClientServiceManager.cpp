@@ -8,6 +8,7 @@
 #include "TcpServerController.h"
 #include "TcpClient.h"
 #include "TcpClientServiceManager.h"
+#include "TcpMsgDemarcar.h"
 
 unsigned char client_recv_buffer[MAX_CLIENT_BUFFER_SIZE];
 
