@@ -118,6 +118,12 @@ build CMakeFiles/TCP_IP_Server.dir/TcpMsgFixedSizeDemarcar.cpp.o: CXX_COMPILER__
   OBJECT_DIR = CMakeFiles/TCP_IP_Server.dir
   OBJECT_FILE_DIR = CMakeFiles/TCP_IP_Server.dir
 
+build CMakeFiles/TCP_IP_Server.dir/TcpMsgVariableSizeDemarcar.cpp.o: CXX_COMPILER__TCP_IP_Server_Debug /Users/maxkienast/Desktop/Education/Programming$ Courses/C++/TCP-IP-Server/TcpMsgVariableSizeDemarcar.cpp || cmake_object_order_depends_target_TCP_IP_Server
+  DEP_FILE = CMakeFiles/TCP_IP_Server.dir/TcpMsgVariableSizeDemarcar.cpp.o.d
+  FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -fcolor-diagnostics -std=gnu++17
+  OBJECT_DIR = CMakeFiles/TCP_IP_Server.dir
+  OBJECT_FILE_DIR = CMakeFiles/TCP_IP_Server.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target TCP_IP_Server
@@ -126,7 +132,7 @@ build CMakeFiles/TCP_IP_Server.dir/TcpMsgFixedSizeDemarcar.cpp.o: CXX_COMPILER__
 #############################################
 # Link the executable TCP_IP_Server
 
-build TCP_IP_Server: CXX_EXECUTABLE_LINKER__TCP_IP_Server_Debug CMakeFiles/TCP_IP_Server.dir/testapp.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpServerController.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpNewConnectionAcceptor.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpClientDbManager.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpClientServiceManager.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpClient.cpp.o CMakeFiles/TCP_IP_Server.dir/network_utils.cpp.o CMakeFiles/TCP_IP_Server.dir/tcp_client.cpp.o CMakeFiles/TCP_IP_Server.dir/tcp_client_string_sender.cpp.o CMakeFiles/TCP_IP_Server.dir/ByteCircularBuffer.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpMsgDemarcar.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpMsgFixedSizeDemarcar.cpp.o
+build TCP_IP_Server: CXX_EXECUTABLE_LINKER__TCP_IP_Server_Debug CMakeFiles/TCP_IP_Server.dir/testapp.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpServerController.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpNewConnectionAcceptor.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpClientDbManager.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpClientServiceManager.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpClient.cpp.o CMakeFiles/TCP_IP_Server.dir/network_utils.cpp.o CMakeFiles/TCP_IP_Server.dir/tcp_client.cpp.o CMakeFiles/TCP_IP_Server.dir/tcp_client_string_sender.cpp.o CMakeFiles/TCP_IP_Server.dir/ByteCircularBuffer.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpMsgDemarcar.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpMsgFixedSizeDemarcar.cpp.o CMakeFiles/TCP_IP_Server.dir/TcpMsgVariableSizeDemarcar.cpp.o
   FLAGS = -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk
   OBJECT_DIR = CMakeFiles/TCP_IP_Server.dir
   POST_BUILD = :
